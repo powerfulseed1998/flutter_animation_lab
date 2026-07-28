@@ -16,7 +16,7 @@ class _Exercise12PageState extends State<Exercise12Page> {
   Widget build(BuildContext context) {
     // TODO(学员): 使用 Tween<double>(begin: 16, end: 32)
     // 的 transform 方法计算 fontSize，替换下面的固定值。
-    const fontSize = 16.0;
+    final fontSize = Tween<double>(begin: 16, end: 32).transform(_progress);
     return ExerciseWorkspace(
       exerciseId: '1-2',
       title: '映射温度值',

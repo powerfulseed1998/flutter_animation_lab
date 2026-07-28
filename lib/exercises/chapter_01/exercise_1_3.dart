@@ -25,8 +25,38 @@ class _DecisionTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO(学员): 实现一个三行的选择表。
-    // 提示：可使用 DataTable，列为“需求 / API / 需要 Controller”。
-    return const StarterPlaceholder(message: 'TODO：实现动画方案选择表');
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: DataTable(
+        columns: const [
+          DataColumn(label: Text('需求')),
+          DataColumn(label: Text('API')),
+          DataColumn(label: Text('需要 Controller')),
+        ],
+        rows: const [
+          DataRow(
+            cells: [
+              DataCell(Text('按钮变色')),
+              DataCell(Text('AnimatedContainer')),
+              DataCell(Text('否')),
+            ],
+          ),
+          DataRow(
+            cells: [
+              DataCell(Text('无限旋转')),
+              DataCell(Text('AnimationController.repeat + RotationTransition')),
+              DataCell(Text('是')),
+            ],
+          ),
+          DataRow(
+            cells: [
+              DataCell(Text('跨页面图片')),
+              DataCell(Text('Hero')),
+              DataCell(Text('否（Navigator 管理）')),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

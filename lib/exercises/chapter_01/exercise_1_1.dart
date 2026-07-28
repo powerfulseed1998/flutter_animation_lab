@@ -27,16 +27,13 @@ class _RoleCards extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            children: [
-              Text('Controller'),
-              SizedBox(height: 10),
-              Text('Curve'),
-              SizedBox(height: 10),
-              Text('Tween'),
-            ],
-          ),
+          Text('Controller\n负责时间process 0-100%的控制和动画总时长的声明'),
+          SizedBox(height: 10),
+          Text('Curve\n负责动画的速度节奏控制，不会改变动画总时长。'),
+          SizedBox(height: 10),
+          Text('Tween\n负责基于 Controller Process 映射动画帧插值'),
         ],
       ),
     );
