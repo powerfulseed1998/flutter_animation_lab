@@ -13,7 +13,6 @@ class Exercise71Page extends StatelessWidget {
       filePath: 'lib/exercises/chapter_07/exercise_7_1.dart',
       tasks: const [
         '实现两个按钮：一个使用 MaterialPageRoute，一个使用自定义 Route。',
-        '在代码注释中写出各自适用场景。',
       ],
       child: Wrap(
         spacing: 12,

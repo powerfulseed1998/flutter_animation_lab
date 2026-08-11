@@ -9,44 +9,45 @@ class Exercise82Page extends StatefulWidget {
   State<Exercise82Page> createState() => _Exercise82PageState();
 }
 
-class _Exercise82PageState extends State<Exercise82Page>
-    with SingleTickerProviderStateMixin {
-  late final AnimationController _controller;
+class _Exercise82PageState extends State<Exercise82Page> {
+  final _listKey = GlobalKey<AnimatedListState>();
+  final _items = <String>['任务 A', '任务 B'];
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1200),
-    );
-    // TODO(学员): 在此创建 opacity、position、scale 三个 Animation。
-    // 分别使用 Interval(0,.35)、Interval(.2,.7)、Interval(.55,1)。
+  void _insert() {
+    // TODO(学员): 先在 _items 的索引 0 插入数据，再调用 insertItem(0)。
   }
 
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+  void _removeLast() {
+    // TODO(学员): 保存并删除最后一项，再调用 removeItem。
+    // removeItem 的 builder 必须显示保存下来的字符串。
   }
 
   @override
   Widget build(BuildContext context) {
     return ExerciseWorkspace(
       exerciseId: '8-2',
-      title: '三段入场',
+      title: '可增删清单',
       filePath: 'lib/exercises/chapter_08/exercise_8_2.dart',
-      tasks: const ['透明度、位移和缩放依次执行并允许重叠。', '三个动画共用一个 Controller。'],
+      tasks: const ['使用 AnimatedList 实现头部插入和末项删除。', '数据集合与动画索引始终同步。'],
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // TODO(学员): 用三个 Transition Widget 包住此卡片。
-          const Card(
-            child: Padding(padding: EdgeInsets.all(32), child: Text('交错入场卡片')),
+          SizedBox(
+            height: 180,
+            child: AnimatedList(
+              key: _listKey,
+              initialItemCount: _items.length,
+              itemBuilder: (_, index, animation) => SizeTransition(
+                sizeFactor: animation,
+                child: ListTile(title: Text(_items[index])),
+              ),
+            ),
           ),
-          FilledButton(
-            onPressed: () => _controller.forward(from: 0),
-            child: const Text('重播'),
+          Wrap(
+            spacing: 8,
+            children: [
+              FilledButton(onPressed: _insert, child: const Text('头部插入')),
+              OutlinedButton(onPressed: _removeLast, child: const Text('删除末项')),
+            ],
           ),
         ],
       ),

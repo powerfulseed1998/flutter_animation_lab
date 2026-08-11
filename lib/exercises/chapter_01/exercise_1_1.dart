@@ -2,38 +2,35 @@ import 'package:flutter/material.dart';
 
 import '../exercise_workspace.dart';
 
-class Exercise11Page extends StatelessWidget {
+class Exercise11Page extends StatefulWidget {
   const Exercise11Page({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const ExerciseWorkspace(
-      exerciseId: '1-1',
-      title: '辨认三种角色',
-      filePath: 'lib/exercises/chapter_01/exercise_1_1.dart',
-      tasks: ['补全 _RoleCard，让页面分别说明 Controller、Curve、Tween 的职责。', '在 Controller 卡片中明确写出“负责总时长”。'],
-      child: _RoleCards(),
-    );
-  }
+  State<Exercise11Page> createState() => _Exercise11PageState();
 }
 
-class _RoleCards extends StatelessWidget {
-  const _RoleCards();
+class _Exercise11PageState extends State<Exercise11Page> {
+  double _progress = 0;
 
   @override
   Widget build(BuildContext context) {
-    // TODO(学员): 用三个 Card 替换占位内容。
-    // 每张卡至少包含角色名称、输入、输出和职责说明。
-    return Container(
-      alignment: Alignment.center,
+    // TODO(学员): 使用 Tween<double>(begin: 16, end: 32)
+    // 的 transform 方法计算 fontSize，替换下面的固定值。
+    final fontSize = Tween<double>(begin: 16, end: 32).transform(_progress);
+    return ExerciseWorkspace(
+      exerciseId: '1-1',
+      title: '映射温度值',
+      filePath: 'lib/exercises/chapter_01/exercise_1_1.dart',
+      tasks: const ['把 0～1 的进度映射成 16～32 的字体大小。', '拖动 Slider 时文字大小应连续变化。'],
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('Controller\n负责时间process 0-100%的控制和动画总时长的声明'),
-          SizedBox(height: 10),
-          Text('Curve\n负责动画的速度节奏控制，不会改变动画总时长。'),
-          SizedBox(height: 10),
-          Text('Tween\n负责基于 Controller Process 映射动画帧插值'),
+          Text('24°C', style: TextStyle(fontSize: fontSize)),
+          Slider(
+            value: _progress,
+            onChanged: (value) => setState(() => _progress = value),
+          ),
+          Text('进度：${_progress.toStringAsFixed(2)}'),
         ],
       ),
     );

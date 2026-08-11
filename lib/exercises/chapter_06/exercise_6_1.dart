@@ -14,7 +14,7 @@ class Exercise61Page extends StatelessWidget {
       tasks: [
         '并排实现 SlideTransition 与 Transform.translate。',
         '前者使用 Offset(0, 1)，后者移动固定 100px。',
-        '改变 child 高度，观察并注释两种单位的区别。',
+        '提供可调节 child 高度的控件，对比两种位移单位。',
       ],
       child: _OffsetComparison(),
     );

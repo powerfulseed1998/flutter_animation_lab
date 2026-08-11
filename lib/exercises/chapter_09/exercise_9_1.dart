@@ -34,7 +34,7 @@ class _Exercise91PageState extends State<Exercise91Page>
       exerciseId: '9-1',
       title: '定位重建成本',
       filePath: 'lib/exercises/chapter_09/exercise_9_1.dart',
-      tasks: const ['把静态图标移到 AnimatedBuilder.child。', '在注释中区分 Widget 重建与像素重绘。'],
+      tasks: const ['把静态图标移到 AnimatedBuilder.child。'],
       child: AnimatedBuilder(
         animation: _controller,
         builder: (_, _) {

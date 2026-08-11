@@ -14,7 +14,7 @@ class Exercise51Page extends StatelessWidget {
       tasks: [
         '把 _LifecycleStarter 改为 StatefulWidget。',
         '混入 SingleTickerProviderStateMixin，并创建 Controller。',
-        '在 dispose 中释放 Controller；用注释解释 vsync。',
+        '在 dispose 中释放 Controller。',
       ],
       child: _LifecycleStarter(),
     );

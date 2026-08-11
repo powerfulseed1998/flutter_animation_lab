@@ -2,8 +2,6 @@ import 'package:flutter/widgets.dart';
 
 import 'chapter_01/exercise_1_1.dart';
 import 'chapter_01/exercise_1_2.dart';
-import 'chapter_01/exercise_1_3.dart';
-import 'chapter_01/exercise_1_4.dart';
 import 'chapter_02/exercise_2_1.dart';
 import 'chapter_02/exercise_2_2.dart';
 import 'chapter_02/exercise_2_3.dart';
@@ -31,7 +29,6 @@ import 'chapter_07/exercise_7_4.dart';
 import 'chapter_08/exercise_8_1.dart';
 import 'chapter_08/exercise_8_2.dart';
 import 'chapter_08/exercise_8_3.dart';
-import 'chapter_08/exercise_8_4.dart';
 import 'chapter_09/exercise_9_1.dart';
 import 'chapter_09/exercise_9_2.dart';
 import 'chapter_09/exercise_9_3.dart';
@@ -42,8 +39,6 @@ abstract final class ExerciseRegistry {
     return switch (id) {
       '1-1' => const Exercise11Page(),
       '1-2' => const Exercise12Page(),
-      '1-3' => const Exercise13Page(),
-      '1-4' => const Exercise14Page(),
       '2-1' => const Exercise21Page(),
       '2-2' => const Exercise22Page(),
       '2-3' => const Exercise23Page(),
@@ -71,7 +66,6 @@ abstract final class ExerciseRegistry {
       '8-1' => const Exercise81Page(),
       '8-2' => const Exercise82Page(),
       '8-3' => const Exercise83Page(),
-      '8-4' => const Exercise84Page(),
       '9-1' => const Exercise91Page(),
       '9-2' => const Exercise92Page(),
       '9-3' => const Exercise93Page(),

@@ -9,28 +9,72 @@ class Exercise12Page extends StatefulWidget {
   State<Exercise12Page> createState() => _Exercise12PageState();
 }
 
-class _Exercise12PageState extends State<Exercise12Page> {
-  double _progress = 0;
+class _Exercise12PageState extends State<Exercise12Page> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Animation<Offset> _track(Curve curve) {
+    return Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(2, 0),
+    ).animate(CurvedAnimation(parent: _controller, curve: curve));
+  }
+
+  Widget _buildTrack(String name, Animation<Offset> position) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(name),
+          const SizedBox(height: 6),
+          SlideTransition(
+            position: position,
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.primary,
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO(学员): 使用 Tween<double>(begin: 16, end: 32)
-    // 的 transform 方法计算 fontSize，替换下面的固定值。
-    final fontSize = Tween<double>(begin: 16, end: 32).transform(_progress);
+    final linear = _track(Curves.linear);
+    final cubic = _track(Curves.easeOutCubic);
+    final back = _track(Curves.easeOutBack);
+
     return ExerciseWorkspace(
       exerciseId: '1-2',
-      title: '映射温度值',
+      title: '制作曲线比较器',
       filePath: 'lib/exercises/chapter_01/exercise_1_2.dart',
-      tasks: const ['把 0～1 的进度映射成 16～32 的字体大小。', '拖动 Slider 时文字大小应连续变化。'],
+      tasks: const ['三个动画必须共用 _controller。', '为每条轨道显示曲线名称，并支持重播。'],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('24°C', style: TextStyle(fontSize: fontSize)),
-          Slider(
-            value: _progress,
-            onChanged: (value) => setState(() => _progress = value),
-          ),
-          Text('进度：${_progress.toStringAsFixed(2)}'),
+          _buildTrack('linear', linear),
+          _buildTrack('easeOutCubic', cubic),
+          _buildTrack('easeOutBack', back),
+          const SizedBox(height: 8),
+          FilledButton(onPressed: () => _controller.forward(from: 0), child: const Text('重播')),
         ],
       ),
     );

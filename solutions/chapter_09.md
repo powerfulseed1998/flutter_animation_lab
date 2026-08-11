@@ -31,7 +31,18 @@ expect(width(), closeTo(240, .1));
 
 ## 9-4 动画代码审查
 
-- 生命周期：Controller 在 `initState` 创建、`dispose` 释放，异步回调检查 `mounted`。
-- 性能：静态子树使用 child，避免整页监听每帧，先用 DevTools 定位瓶颈。
-- 语义：支持 `disableAnimations`，状态变化有 Semantics 或可见文本。
-- 测试：用 `pump(Duration)` 验证边界、反向、快速操作和页面销毁，不使用真实延迟。
+把图标移入 `TweenAnimationBuilder.child`，并在 `disableAnimations` 时将 `duration` 设为 `Duration.zero`：
+
+```dart
+final reduceMotion = MediaQuery.disableAnimationsOf(context);
+
+return TweenAnimationBuilder<double>(
+  tween: Tween(begin: 0, end: 1),
+  duration: reduceMotion ? Duration.zero : const Duration(seconds: 1),
+  builder: (_, value, child) => Opacity(
+    opacity: value,
+    child: Transform.scale(scale: .8 + value * .2, child: child),
+  ),
+  child: const Icon(Icons.rate_review, size: 80),
+);
+```

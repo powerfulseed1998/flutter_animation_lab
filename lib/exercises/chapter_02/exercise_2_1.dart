@@ -14,7 +14,6 @@ class Exercise21Page extends StatelessWidget {
       tasks: [
         '实现一个可点击的选中态卡片。',
         '只使用隐式动画，不创建 AnimationController。',
-        '在代码注释中说明这样选择的原因。',
       ],
       child: _SelectableCard(),
     );

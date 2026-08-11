@@ -8,10 +8,7 @@ import 'package:flutter_test/flutter_test.dart';
 Widget _harness(Widget child) {
   return MaterialApp(
     home: Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: child,
-      ),
+      body: SingleChildScrollView(padding: const EdgeInsets.all(16), child: child),
     ),
   );
 }
@@ -30,9 +27,7 @@ void main() {
     expect(find.byKey(const ValueKey('chapter-card-1')), findsOneWidget);
   });
 
-  testWidgets('home lists chapters and opens the first chapter', (
-    tester,
-  ) async {
+  testWidgets('home lists chapters and opens the first chapter', (tester) async {
     await tester.pumpWidget(const AnimationLabApp());
 
     expect(find.text('Flutter 动画实验室'), findsWidgets);
@@ -60,12 +55,8 @@ void main() {
     expect(find.byKey(const ValueKey<int>(1)), findsOneWidget);
   });
 
-  testWidgets('exercise card opens its editable code workspace', (
-    tester,
-  ) async {
-    await tester.pumpWidget(
-      MaterialApp(home: ChapterPage(chapter: chapters.first)),
-    );
+  testWidgets('exercise card opens its editable code workspace', (tester) async {
+    await tester.pumpWidget(MaterialApp(home: ChapterPage(chapter: chapters.first)));
 
     await tester.tap(find.text('练习'));
     await tester.pumpAndSettle();
@@ -74,17 +65,12 @@ void main() {
     await tester.tap(openButton);
     await tester.pumpAndSettle();
 
-    expect(find.text('1-1 · 辨认三种角色'), findsOneWidget);
-    expect(
-      find.text('lib/exercises/chapter_01/exercise_1_1.dart'),
-      findsOneWidget,
-    );
-    expect(find.textContaining('TODO：绘制'), findsOneWidget);
+    expect(find.text('1-1 · 映射温度值'), findsOneWidget);
+    expect(find.text('lib/exercises/chapter_01/exercise_1_1.dart'), findsOneWidget);
+    expect(find.textContaining('进度：'), findsOneWidget);
   });
 
-  testWidgets('implicit animation has deterministic midpoint and end', (
-    tester,
-  ) async {
+  testWidgets('implicit animation has deterministic midpoint and end', (tester) async {
     await tester.pumpWidget(_harness(const ImplicitAnimationDemo()));
     final box = find.byKey(const ValueKey('implicit-box'));
 
@@ -104,9 +90,7 @@ void main() {
     await tester.tap(find.byKey(const ValueKey('controller-forward')));
     await tester.pump();
     await tester.pump(const Duration(milliseconds: 450));
-    final status = tester.widget<Text>(
-      find.byKey(const ValueKey('controller-status')),
-    );
+    final status = tester.widget<Text>(find.byKey(const ValueKey('controller-status')));
     expect(status.data, contains('进度 0.50'));
 
     await tester.tap(find.byKey(const ValueKey('controller-reset')));
@@ -114,9 +98,7 @@ void main() {
     expect(find.textContaining('进度 0.00'), findsOneWidget);
   });
 
-  testWidgets('AnimatedList inserts and removes synchronized items', (
-    tester,
-  ) async {
+  testWidgets('AnimatedList inserts and removes synchronized items', (tester) async {
     await tester.pumpWidget(_harness(const StaggeredListDemo()));
     await tester.pump(const Duration(seconds: 1));
 

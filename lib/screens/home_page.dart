@@ -20,7 +20,9 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(right: 16),
                 child: Chip(
                   avatar: const Icon(Icons.school_outlined, size: 18),
-                  label: Text('${chapters.length} 章 · 36 题'),
+                  label: Text(
+                    '${chapters.length} 章 · ${chapters.expand((c) => c.exercises).length} 题',
+                  ),
                 ),
               ),
             ],
@@ -80,9 +82,7 @@ class _IntroCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [colors.primaryContainer, colors.tertiaryContainer],
-        ),
+        gradient: LinearGradient(colors: [colors.primaryContainer, colors.tertiaryContainer]),
         borderRadius: BorderRadius.circular(28),
       ),
       child: Row(
@@ -153,16 +153,14 @@ class _ChapterCard extends StatelessWidget {
                 chapter.subtitle,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color: colors.onSurfaceVariant,
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(color: colors.onSurfaceVariant),
               ),
               const SizedBox(height: 12),
               Text(
                 '${chapter.exercises.length} 道练习',
-                style: Theme.of(
-                  context,
-                ).textTheme.labelLarge?.copyWith(color: colors.primary),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(color: colors.primary),
               ),
             ],
           ),

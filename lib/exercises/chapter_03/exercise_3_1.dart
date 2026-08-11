@@ -21,7 +21,6 @@ class _Exercise31PageState extends State<Exercise31Page> {
       tasks: const [
         '先运行当前代码，观察数字为什么没有切换动画。',
         '只修改一行：为 Text 添加 ValueKey(count)。',
-        '在 TODO 下方注释解释 Widget 身份。',
       ],
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

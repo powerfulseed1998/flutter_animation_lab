@@ -14,7 +14,6 @@ class Exercise41Page extends StatelessWidget {
       tasks: [
         '实现两个小 Demo：目标值动画与可暂停动画。',
         '前者使用 TweenAnimationBuilder，后者使用 AnimationController。',
-        '在代码注释里写出选择理由。',
       ],
       child: _Comparison(),
     );
