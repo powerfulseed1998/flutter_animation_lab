@@ -26,10 +26,19 @@ class _Exercise22PageState extends State<Exercise22Page> {
         child: IconButton(
           onPressed: () => setState(() => _selected = !_selected),
           // TODO(学员): 在 Icon 外组合 AnimatedRotation 与 AnimatedScale。
-          icon: Icon(
-            _selected ? Icons.favorite : Icons.favorite_border,
-            size: 56,
-            color: _selected ? Colors.red : null,
+          icon: AnimatedRotation(
+            turns: _selected ? 1 : 0,
+            duration: const Duration(milliseconds: 280),
+            child: AnimatedScale(
+              scale: _selected ? 1.25 : 1.0,
+              duration: const Duration(milliseconds: 280),
+              curve: _selected ? Curves.easeOutBack : Curves.easeIn,
+              child: Icon(
+                _selected ? Icons.favorite : Icons.favorite_border,
+                size: 56,
+                color: _selected ? Colors.red : null,
+              ),
+            ),
           ),
         ),
       ),
