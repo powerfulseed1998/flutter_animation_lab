@@ -27,9 +27,16 @@ class _Exercise23PageState extends State<Exercise23Page> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           // TODO(学员): 用 IgnorePointer + AnimatedOpacity 包住此按钮。
-          ElevatedButton(
-            onPressed: () => setState(() => _tapCount++),
-            child: Text('已点击 $_tapCount 次'),
+          IgnorePointer(
+            ignoring: _visible ? false : true,
+            child: AnimatedOpacity(
+              opacity: _visible ? 1 : 0,
+              duration: Duration(milliseconds: 250),
+              child: ElevatedButton(
+                onPressed: () => setState(() => _tapCount++),
+                child: Text('已点击 $_tapCount 次'),
+              ),
+            ),
           ),
           const SizedBox(height: 20),
           SwitchListTile(
