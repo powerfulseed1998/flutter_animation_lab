@@ -28,12 +28,19 @@ class _Exercise32PageState extends State<Exercise32Page> {
           child: FilledButton(
             onPressed: () => setState(() => _loading = !_loading),
             // TODO(学员): 用 AnimatedSwitcher 替换当前条件表达式。
-            child: _loading
-                ? const SizedBox.square(
-                    dimension: 20,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Text('提交'),
+            child: AnimatedSwitcher(
+              duration: Duration(milliseconds: 250),
+              child: _loading
+                  ? const SizedBox.square(
+                      dimension: 20,
+                      key: ValueKey('square'),
+                      child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white,),
+                    )
+                  : const Text(
+                    '提交',
+                    key: ValueKey('submit text'),
+                    ),
+            ),
           ),
         ),
       ),

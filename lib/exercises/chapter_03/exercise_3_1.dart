@@ -30,6 +30,7 @@ class _Exercise31PageState extends State<Exercise31Page> {
             // TODO(学员): 给下面的 Text 添加 key: ValueKey(_count)。
             child: Text(
               '$_count',
+              key: ValueKey(_count),
               style: Theme.of(context).textTheme.displayMedium,
             ),
           ),

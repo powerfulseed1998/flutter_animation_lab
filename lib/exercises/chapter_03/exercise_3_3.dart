@@ -33,13 +33,29 @@ class _Exercise33PageState extends State<Exercise33Page> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           AnimatedSwitcher(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 350),
+            switchInCurve: Curves.easeOutCubic,
+            switchOutCurve: Curves.easeInCubic,
             child: Text(
               '$_count',
               key: ValueKey(_count),
               style: Theme.of(context).textTheme.displayMedium,
             ),
+            transitionBuilder: (child, animation) {
+              final begin = Offset(0, _increasing ? 0.25 : -0.25);
+              return FadeTransition(
+                opacity: animation,
+                child: SlideTransition(
+                  position: Tween<Offset>(
+                    begin: begin,
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: child,
+                ),
+              );
+            },
           ),
+     
           Text(_increasing ? '当前方向：增加' : '当前方向：减少'),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
